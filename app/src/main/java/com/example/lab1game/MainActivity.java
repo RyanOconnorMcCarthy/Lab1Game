@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +19,18 @@ public class MainActivity extends AppCompatActivity {
 
 
    Button enterbtn;
-   TextView input;
+   EditText input;
    TextView title;
+   TextView guesses;
+
+   int count = 0;
+
+    Random random = new Random();
+    int randomNumber;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +39,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         enterbtn = findViewById(R.id.button);
-        input = findViewById(R.id.textView2);
+        input = findViewById(R.id.editTextText2);
         title = findViewById(R.id.textView);
+        guesses = findViewById(R.id.textView2);
+
+        randomNumber = random.nextInt(29) + 1;
 
 
 
@@ -45,7 +59,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Guess(View view) {
-        title.setText(" " + input);
+
+        int number = Integer.parseInt(input.getText().toString());
+
+        if (number == randomNumber){
+            Toast.makeText(this, "You guessed correct", Toast.LENGTH_SHORT).show();
+
+        }
+
+        else if (number > randomNumber) {
+            Toast.makeText(this, "Your number is too high1", Toast.LENGTH_SHORT).show();
+            count = count + 1;
+            guesses.setText("Total Guesses: "+ count);
+        }
+        else if (number < randomNumber) {
+            Toast.makeText(this, "Your number is too low!", Toast.LENGTH_SHORT).show();
+            count = count + 1;
+            guesses.setText("Total Guesses: "+ count);
+        }
 
 
 
