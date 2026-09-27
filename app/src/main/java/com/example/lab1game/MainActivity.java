@@ -83,5 +83,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reset(View view) {
+        count = 0;
+        guesses.setText("Total Guesses: "+ count);
+        randomNumber = random.nextInt(29) + 1;
+
     }
 }
